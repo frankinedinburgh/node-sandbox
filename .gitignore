@@ -1,2 +1,4 @@
 .idea
+.env
 playground
+node_modules
