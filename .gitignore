@@ -1,0 +1,5 @@
+.idea
+.env
+sandbox/*
+playground
+node_modules
