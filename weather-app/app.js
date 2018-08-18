@@ -2,6 +2,7 @@ require('dotenv').load();
 const yargs = require('yargs');
 const geocode = require('./geocode/geocode');
 const forecast = require('./forecast/forecast');
+const strava = require('./strava/strava');
 
 const argv = yargs
     .options({
@@ -42,6 +43,16 @@ geocode.geocodeAddress(argv.address, (error, response) => {
 
 });
 
+
+
+strava.getActivities((err, res) => {
+    if(err) {
+        return console.log('There was an error');
+    }
+
+    console.log(JSON.stringify(res, null, 4))
+
+});
 
 
 
