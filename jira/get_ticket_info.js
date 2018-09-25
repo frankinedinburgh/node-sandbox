@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const exec = require('child_process').exec;
 
-dotenv.config({path: path.join(__dirname, '../.env')});
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const getTicket = (num) => (
 
