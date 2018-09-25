@@ -1,12 +1,34 @@
 const path = require('path');
+const fs = require('fs');
 const dotenv = require('dotenv');
-dotenv.config({path: path.join(__dirname, '../.env')});
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const faker = require('faker');
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
 const iPad = devices['iPad'];
 const url = process.env.TESTING_URL;
+
+const text =  JSON.stringify({
+	title: faker.name.jobTitle(),
+	excerpt: faker.lorem.lines(3),
+	description: faker.lorem.paragraph(),
+	tags: faker.lorem.words(3).split(' '),
+
+}, null, 4);
+
+
+fs.writeFile(path.join(__dirname, '../faker.txt'), text, function(err) {
+	if(err) {
+		return console.log(err);
+	}
+
+	console.log("The file was saved!");
+	process.exit();
+});
+
+
+
 
 
 
@@ -18,6 +40,7 @@ const url = process.env.TESTING_URL;
 		//slowMo: 100
 	});
 	const page = await browser.newPage();
+	console.log(Object.keys(page));
 	//await page.emulate(iPad);
 
 	await page.goto(`${url}/upload-blog/`, { waitUntil: 'networkidle2' });
@@ -39,6 +62,7 @@ const url = process.env.TESTING_URL;
 
 
 	await page.click('body > div.ng-scope > upload-blog > div > div:nth-child(1) > div > div > div > form > div:nth-child(5) > div.add_cover.blog_thumb.hover-pointer.ng-pristine.ng-untouched.ng-valid.ng-scope.ng-empty')
+	await page.uploadFile('../example.png');
 
 
 	// Type into search box.
