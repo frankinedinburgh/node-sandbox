@@ -12,7 +12,7 @@ const isPalindrome = string => {
     });
 
 
-    if(lettersArr.join('') !== lettersArr.reverse().join('')) {                              1
+    if(lettersArr.join('') !== lettersArr.reverse().join('')) {
         return false;
     }
 

@@ -12,8 +12,12 @@ const url = process.env.TESTING_URL;
 const text =  JSON.stringify({
 	title: faker.name.jobTitle(),
 	excerpt: faker.lorem.lines(3),
-	description: faker.lorem.paragraph(),
+	description: faker.lorem.text(200),
 	tags: faker.lorem.words(3).split(' '),
+	image: faker.image.imageUrl(),
+	name: faker.name.firstName(),
+	last: faker.name.lastName(),
+	position: faker.name.jobType(),
 
 }, null, 4);
 

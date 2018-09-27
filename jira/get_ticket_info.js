@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
 const exec = require('child_process').exec;
+const request = require('request');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
@@ -32,8 +33,6 @@ const getTicket = (num) => (
 				resolve(ticket)
 			});
 
-			//console.log(`stdout: ${stdout}`);
-			//console.log(`stderr: ${stderr}`);
 		});
 
 	})
@@ -41,8 +40,30 @@ const getTicket = (num) => (
 )
 
 
+const getJiraTicketsByQuery = (query) => {
+	return new Promise(function(resolve, reject){
+		request(query, {
+			json: true,
+			auth: {
+				username: process.env.JIRA_USERNAME,
+				password: process.env.JIRA_PASSWORD
+			}
+		}, (error, response, body) => {
+
+			if(error) return reject(error);
+
+			if(response.statusCode !== 200) return reject(response.statusMessage);
+
+			resolve(body);
+
+		});
+	});
+};
+
+
 module.exports = {
-	getTicket
+	getTicket,
+	getJiraTicketsByQuery
 };
 
 
