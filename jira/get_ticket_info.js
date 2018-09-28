@@ -61,11 +61,56 @@ const getJiraTicketsByQuery = (query) => {
 };
 
 
-module.exports = {
-	getTicket,
-	getJiraTicketsByQuery
+const postComment = (ticket, comment) => {
+
+	const options = {
+		method: 'POST',
+		url: `${process.env.JIRA_URL}/rest/api/2/issue/${ticket}/comment`,
+		auth: {
+			username: process.env.JIRA_USERNAME,
+			password: process.env.JIRA_PASSWORD,
+			sendImmediately: true
+		},
+		body: {
+			body: comment
+		},
+		json: true
+	};
+
+
+	return new Promise(function(resolve, reject){
+		request(options, (error, response, body) => {
+
+			if(error) return reject(error);
+
+			console.log(response.statusCode)
+
+			if(response.statusCode !== 201) return reject(response.statusMessage);
+
+			resolve(body);
+
+		});
+	});
 };
 
+
+
+
+
+
+module.exports = {
+	getTicket,
+	getJiraTicketsByQuery,
+	postComment
+};
+
+
+
+
+
+
+
+//curl -D- -u fred:fred -X PUT --data {see below} -H "Content-Type: application/json" http://kelpie9:8081/rest/api/2/issue/QA-31
 
 
 
