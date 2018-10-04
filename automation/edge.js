@@ -4,34 +4,18 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const { getTicket:ticket, getJiraTicketsByQuery:backlog, postComment:comment } = require('../jira/get_ticket_info');
 
 
-
-
-
-//console.log(url)
-//process.exit();
-
-
-//
-//ticket('ALTV-1890').then(res => {
-//
-//	const { summary } = JSON.parse(res).fields;
-//	console.log(summary);
-//
-//}).catch(err => {
-//
-//	return console.log(err)
-//
-//})
-
-
 let QUERY = encodeURIComponent('project = ALTV AND resolution=Unresolved AND status="To Do"');
 QUERY = `${process.env.JIRA_URL}/rest/api/2/search?jql=${QUERY}`;
 
 
 let DONE = encodeURIComponent(`project="ALTV" AND resolution=Unresolved AND status="Developer Test"`);
 DONE = `${process.env.JIRA_URL}/rest/api/2/search?jql=${DONE}`;
+
+
+let SPRINT = encodeURIComponent(`project="ALTV" AND Status="In Progress" AND Sprint="Sprint 70-Go Live"`);
+SPRINT = `${process.env.JIRA_URL}/rest/api/2/search?jql=${SPRINT}`;
 // Fetch tickets from the Backlog
-backlog(QUERY).then(res => {
+backlog(SPRINT).then(res => {
 
 	const { issues } = res;
 	issues.map(d => {

@@ -83,7 +83,7 @@ const postComment = (ticket, comment) => {
 
 			if(error) return reject(error);
 
-			console.log(response.statusCode)
+			console.log(response.statusCode);
 
 			if(response.statusCode !== 201) return reject(response.statusMessage);
 
