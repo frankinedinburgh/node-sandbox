@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/frankinedinburgh/node-sandbox#readme",
   "dependencies": {
+    "chalk": "^2.4.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mapquest": "^0.2.0",
