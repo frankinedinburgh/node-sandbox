@@ -5,7 +5,9 @@
   "main": "weather-app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "faker": "node automation/no-images.js"
+    "faker": "node automation/generate_blog_data.js",
+    "image": "node automation/download_image.js",
+    "form": "node automation/form_blog.js"
   },
   "repository": {
     "type": "git",

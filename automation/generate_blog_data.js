@@ -24,18 +24,19 @@ fs.writeFile(path.join(__dirname, '../faker.txt'), text, function(err) {
 	}
 
 	const { image } = JSON.parse(text);
+	let filename = image.split('/');
+	filename = filename[filename.length -1];
+	const newFileName = faker.lorem.slug(1);
 
-	command(`curl -O ${process.env.HOME}/Sites/node-sandbox/images/${image}.jpg`, (error, data) => {
-		if(error) return console.log('There is an error \n' + JSON.stringify(error))
-		console.log('Successfully downloaded image \n' + data)
-		process.exit();
+	const cm = `cd ${path.join(__dirname, '../images/')} && curl -o ${newFileName}.jpeg ${image}`;
+
+	command(cm , (error, data) => {
+		if(error) return console.log(`There is an error \n${cm}`)
+		console.log(`Successfully downloaded image \n${cm}`)
+
 	});
 
 });
-
-
-
-
 
 
 
