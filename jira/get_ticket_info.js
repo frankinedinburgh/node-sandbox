@@ -42,7 +42,7 @@ const getTicket = (num) => (
 
 const getJiraTicketsByQuery = (query) => {
 	return new Promise(function(resolve, reject){
-		request(query, {
+		request(`${process.env.JIRA_URL}/rest/api/2/search?jql=${query}`, {
 			json: true,
 			auth: {
 				username: process.env.JIRA_USERNAME,

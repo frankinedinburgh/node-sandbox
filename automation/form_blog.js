@@ -1,14 +1,18 @@
+/**
+ * @link https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27
+ */
+
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-
 const faker = require('faker');
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
 const iPad = devices['iPad'];
-const url = process.env.TESTING_URL;
+//const url = process.env.TESTING_URL;
+const url = 'http://localhost:8100';
 
 
 
@@ -30,7 +34,14 @@ for (let j=0; j < files.length; j++) {
 
 	const browser = await puppeteer.launch({
 		headless: false,
-		//slowMo: 100
+		viewport: {
+			width: 375,
+			height: 667,
+			deviceScaleFactor: 2,
+			isMobile: true,
+			hasTouch: true,
+			isLandscape: false
+		}
 	});
 	const page = await browser.newPage();
 	console.log(Object.keys(page));
@@ -54,7 +65,7 @@ for (let j=0; j < files.length; j++) {
 	await page.keyboard.type(faker.fake("{{lorem.word}}"));
 
 
-	await page.click('body > div.ng-scope > upload-blog > div > div:nth-child(1) > div > div > div > form > div:nth-child(5) > div.add_cover.blog_thumb.hover-pointer.ng-pristine.ng-untouched.ng-valid.ng-scope.ng-empty')
+	await page.click('body > div.ng-scope > upload-blog > div > div:nth-child(1) > div > div > div > form > div:nth-child(5) > div.add_cover.blog_thumb')
 	try{
 		await page.uploadFile(...files);
 	} catch(err) {
