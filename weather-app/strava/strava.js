@@ -74,11 +74,6 @@ const getActivities = () => (
 
 
 
-
-
-
-
-
 module.exports = {
     athlete,
     getActivities
