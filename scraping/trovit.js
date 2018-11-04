@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
-let myHome = `https://www.myhome.ie/residential/dublin-15/property-for-sale-in-castleknock?maxprice=275000`;
+let myHome = `https://property.trovit.ie/fernleigh-castleknock`;
 
 (async () => {
     const browser = await puppeteer.launch({ headless: true });
@@ -9,25 +9,19 @@ let myHome = `https://www.myhome.ie/residential/dublin-15/property-for-sale-in-c
     await page.goto(myHome);
 
     // get hotel details
-    await page.waitForSelector('.resultContent', {visible: true})
+    await page.waitForSelector('#wrapper_listing', {visible: true})
     try {
         let hotelData = await page.evaluate(() => {
             let list = [];
             // get the hotel elements
-            let results = document.querySelectorAll('.resultContent');
-            let address = document.querySelectorAll('h2.address a');
-            let desc = document.querySelectorAll('.descriptiveTitle');
-            let price = document.querySelectorAll('.price');
-            let time = document.querySelectorAll('.time');
+            let results = document.querySelector('#wrapper_listing').children;
+
             // get the hotel data
+            // let txt = el.innerText.replace('\n','');
+
             results.forEach((el, index) => {
-                // let txt = el.innerText.replace('\n','');
                 let obj = {
-                    address: address[index].innerText || '',
-                    link: address[index].href || '',
-                    desc: desc[index].innerText || '',
-                    price: price[index] ? price[index].innerText : '',
-                    viewings: time[index] ? time[index].innerText : '',
+                    text: el.innerText || '',
                 }
                 list.push(obj);
             });
