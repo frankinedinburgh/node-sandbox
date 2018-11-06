@@ -4,7 +4,7 @@
   "description": "",
   "main": "weather-app/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "faker": "node automation/generate_blog_data.js",
     "image": "node automation/download_image.js",
     "form": "node automation/form_blog.js"
@@ -34,6 +34,8 @@
     "yargs": "^12.0.1"
   },
   "devDependencies": {
-    "faker": "^4.1.0"
+    "faker": "^4.1.0",
+    "jasmine": "^3.3.0",
+    "lodash": "^4.17.11"
   }
 }

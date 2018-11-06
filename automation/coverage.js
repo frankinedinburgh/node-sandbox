@@ -8,6 +8,10 @@ const url = process.env.TESTING_URL;
 (async() =>{
 	puppeteer.launch().then(async browser =>{
 		const page = await browser.newPage();
+        await page.setViewport({
+            width: 1920,
+            height: 926
+        });
 		//start coverage trace
 		await Promise.all([
 			page.coverage.startJSCoverage(),

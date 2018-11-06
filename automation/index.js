@@ -1,26 +1,51 @@
-const path = require('path')
-const dotenv = require('dotenv')
-dotenv.config({path: path.join(__dirname, '../.env')});
-// https://pptr.dev/
-
-
-
 const puppeteer = require('puppeteer');
 
 
 
 
-(async () => {
+
+async function daft() {
 	const browser = await puppeteer.launch({
-		devtools: true,
+		headless: false
+	});
+	const params = encodeURIComponent('s[mxp]=300000&s[mxb]=2');
+	const url = `https://www.daft.ie/dublin/apartments-for-sale/castleknock/?${params}`;
+
+	const page = await browser.newPage();
+	await page.goto(url, {
+		waitUntil: 'networkidle2',
+		timeout: 0
+	});
+	await browser.close();
+
+}
+
+
+
+async function indeed() {
+	const url = 'https://ie.indeed.com/jobs?as_and=javascript+developer&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=permanent&st=employer&as_src=&radius=25&l=Dublin&fromage=any&limit=50&sort=&psf=advsrch';
+	const browser = await puppeteer.launch({
 		headless: false
 	});
 	const page = await browser.newPage();
-	for(var i=0; i<=70; i++) {
-		await page.goto('https://www.poll-maker.com/poll2129695x202b4f4A-60', { waitUntil: 'networkidle2'});
-		await page.click('#qp_form2129695 > div.qp_ao > div:nth-child(7) > span > input');
-		await page.click('#qp_form2129695 > div.qp_bo > a.qp_hra > input');
-	}
 
+	await page.goto(url, {
+		waitUntil: 'networkidle2',
+		timeout: 0
+	});
 	await browser.close();
-})();
+
+}
+
+
+function saveToFile(data) {
+	fs.writeFile('./playground/price-changes.json', data, function (err) {
+		if (err) throw err;
+		console.log('Saved!');
+	});
+}
+
+
+indeed();
+
+
