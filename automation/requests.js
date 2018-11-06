@@ -9,7 +9,8 @@ const puppeteer = require('puppeteer');
 	const browser = await puppeteer.launch({
 		devtools: true,
 		dumpio: true,
-		headless: false
+		headless: false,
+		//executablePath: '/usr/local/bin/chromedriver --whitelisted-ips=""'
 	});
 	const page = await browser.newPage();
 	await page.setCacheEnabled(false);

@@ -22,6 +22,5 @@ const puppeteer = require('puppeteer');
 		await page.click('#qp_form2129695 > div.qp_bo > a.qp_hra > input');
 	}
 
-
 	await browser.close();
 })();
