@@ -11,10 +11,7 @@ const faker = require('faker');
 const puppeteer = require('puppeteer');
 const devices = require('puppeteer/DeviceDescriptors');
 const iPad = devices['iPad'];
-//const url = process.env.TESTING_URL;
-const url = 'http://localhost:8100';
-
-
+const url = process.env.TESTING_URL;
 
 const filePath = path.join(process.env.HOME,  'Desktop/images/');
 
@@ -26,8 +23,6 @@ for (let j=0; j < files.length; j++) {
 	files[j] = path.join(process.env.HOME, 'Desktop/images/', files[j])
 	console.log(files[j])
 }
-
-
 
 
 (async() => {

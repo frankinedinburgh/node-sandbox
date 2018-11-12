@@ -4,8 +4,6 @@ const command = require('../modules/command');
 const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-
-
 const faker = require('faker');
 
 

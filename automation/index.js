@@ -1,41 +1,38 @@
 const puppeteer = require('puppeteer');
 
 
-
-
-
-async function daft() {
+async function poll() {
+	const url = 'https://www.poll-maker.com/poll2139704x6eBc400C-60';
+	//const sel = document.querySelector('[name="qp_v2139704"]');
 	const browser = await puppeteer.launch({
-		headless: false
+		headless: false,
+		args: ['--no-sandbox', '--disable-setuid-sandbox'],
 	});
-	const params = encodeURIComponent('s[mxp]=300000&s[mxb]=2');
-	const url = `https://www.daft.ie/dublin/apartments-for-sale/castleknock/?${params}`;
-
 	const page = await browser.newPage();
-	await page.goto(url, {
-		waitUntil: 'networkidle2',
-		timeout: 0
-	});
+
+
+
+
+
+
+
+
+	for(var i=0; i<= 3; i++) {
+		await page.goto(url, {
+			waitUntil: 'networkidle2',
+			timeout: 0
+		});
+		await page.evaluate(() => {
+			const sel = document.querySelector('[name="qp_v2139704"]');
+			sel.click();
+		});
+	}
+
 	await browser.close();
 
 }
 
 
-
-async function indeed() {
-	const url = 'https://ie.indeed.com/jobs?as_and=javascript+developer&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=permanent&st=employer&as_src=&radius=25&l=Dublin&fromage=any&limit=50&sort=&psf=advsrch';
-	const browser = await puppeteer.launch({
-		headless: false
-	});
-	const page = await browser.newPage();
-
-	await page.goto(url, {
-		waitUntil: 'networkidle2',
-		timeout: 0
-	});
-	await browser.close();
-
-}
 
 
 function saveToFile(data) {
@@ -46,6 +43,6 @@ function saveToFile(data) {
 }
 
 
-indeed();
+poll();
 
 

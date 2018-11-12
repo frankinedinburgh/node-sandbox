@@ -8,6 +8,7 @@ const { getActivities, athlete } = require('../weather-app/strava/strava.js');
 //	console.log(parent); // refers to the parent app
 //});
 
+
 router.get('/strava/', (req, res) => {
 	getActivities().then((response) => {
 
