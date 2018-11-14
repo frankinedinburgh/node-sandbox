@@ -1,20 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const _ = require('lodash');
 
 
-let BACKLOG = encodeURIComponent(process.env.QUERY);
+let BACKLOG = encodeURIComponent('project="MENA"');
 const auth = Buffer.from(`${process.env.JIRA_USERNAME}:${process.env.JIRA_PASSWORD}`, 'utf8').toString('base64');
-
-
-
-
-
-
 
 
 router.get('/tickets/', (req, res) => {
 
+	console.log(`${process.env.JIRA_URL}/rest/api/2/search?jql=${BACKLOG}`);
 
 	const instance = axios({
 		method: 'get',
@@ -25,27 +21,35 @@ router.get('/tickets/', (req, res) => {
 		}
 	})
 
-	instance.catch(function onError(error) {
+	instance.catch(function(error) {
+		console.log(error.response)
 		if (error.response) {
-			res.send(error.response)
+			res.json(error.response)
 		} else if (error.request) {
-			res.send(error.request)
+			res.json(error.request)
 		} else {
-			res.send(error.message)
+			res.json(error.message)
 		}
-	}).then(function(res) {
-		if(res.status !== 200) {
-			res.send(error.statusText)
+	}).then(function(response) {
+        console.log(JSON.stringify(response.data, null, 4))
+		if(response.status !== 200) {
+			res.json(response.statusText)
 		}
-		//const { issues } = res.data;
-		//let results = [];
-		//issues.map(d => {
-		//	results.push({
-		//		key: d.key,
-		//		summary: d.fields.summary
-		//	})
-		//})
-		res.send(res)
+		const { issues } = response.data;
+        let results = _.chain(issues).map(d => ({
+			key: d.key,
+            summary: d.fields.summary,
+            assignee: d.fields.assignee.displayName,
+            status: d.fields.status.name
+		})).sortBy(o => o.status === 'In Progress');
+		// let results = [];
+		// issues.map(d => {
+		// 	results.push({
+		// 		key: d.key,
+		// 		summary: d.fields.summary
+		// 	})
+		// })
+		res.json(results)
 	});
 })
 

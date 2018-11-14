@@ -4,28 +4,48 @@
 const _ = require('lodash');
 const fs = require('fs');
 const webdriver = require('selenium-webdriver');
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, Key, until, promise} = require('selenium-webdriver');
 
 const width = 640;
 const height = 480;
 
+
+
+
 (async function(){
 	const driver = new webdriver.Builder()
-		.forBrowser('chrome')
+		.forBrowser(webdriver.Browser.CHROME)
 		.build();
 
+    const saveToFile = function(arr){
+        fs.writeFile("out.txt", arr, function(err, data) {
+            if(err) console.log(err);
+            console.log(data)
+        });
+    }
 
-	await driver.get('https://www.google.com');
-	await driver.findElement({ name: 'q' }).sendKeys('2 bedroom apartment for sale, Fernleigh, Carpenterstown', Key.RETURN);
-	await driver.wait(until.titleIs('2 bedroom apartment for sale, Fernleigh, Carpenterstown - Google Search'), 1000);
-	const html = driver.getPageSource();
+    const pendingElements = driver.findElements({ className: 'LC20lb' });
+
 	try {
-		//await driver.wait(until.elementLocated({ className: 'LC20lb'}, 1000)).getTagName();
-		fs.writeFile('results.html', JSON.stringify(html, null, 4), 'utf8', () => { return true });
-	} catch(err) {
-		//console.log(err)
-		throw Error('Unable to get item')
-	} finally {
+        await driver.get('https://www.google.com');
+        await driver.findElement({ name: 'q' }).sendKeys('Selenium webdriver nodeJS', Key.RETURN);
+        await driver.wait(until.titleIs('Selenium webdriver nodeJS - Google Search'), 1000);
+        // await driver.takeScreenshot(true).then(function(data){
+        //     var base64Data = data.replace(/^data:image\/png;base64,/,"")
+        //     fs.writeFile("out.png", base64Data, 'base64', function(err) {
+        //         if(err) console.log(err);
+        //     });
+        // });
+        await driver.wait(until.elementsLocated({ className: 'LC20lb' }));
+        await driver.wait(until.titleIs('Selenium webdriver nodeJS - Google Search'), 1000);
+        await pendingElements.then(function (elements) {
+            const pendingHtml = elements.map(function (elem) {
+                return elem.getInnerHtml();
+            });
+
+            promise.all(pendingHtml).then(saveToFile);
+        });
+    } finally {
 		driver.quit()
 	}
 
