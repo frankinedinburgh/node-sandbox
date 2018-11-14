@@ -1,0 +1,194 @@
+[
+    {
+        "key": "ALTV-2084",
+        "summary": "ALTV Web V2: Profile creator - adding a work experience autofills with most recently deleted one"
+    },
+    {
+        "key": "ALTV-2083",
+        "summary": "ALTV Web V2: Home page - scroll bar missing from home page"
+    },
+    {
+        "key": "ALTV-2080",
+        "summary": "ALTV Web V2: Home page - text on some buttons on homepage is misaligned"
+    },
+    {
+        "key": "ALTV-2078",
+        "summary": "ALTV Web V2: 'Live' channel is active on sub menu in Arabic, French and English"
+    },
+    {
+        "key": "ALTV-2077",
+        "summary": "ALTV Web V2: Home page - Revision ID isn't displaying a number"
+    },
+    {
+        "key": "ALTV-2076",
+        "summary": "ALTV Web V2: Profile - logging in as a creator after logging out of viewer makes your profile blank"
+    },
+    {
+        "key": "ALTV-2073",
+        "summary": "ALTV Web V2: Video detail - newlines not working on comments"
+    },
+    {
+        "key": "ALTV-2072",
+        "summary": "ALTV Web V2: Responsive - Jobs Template - Editing job cancel and save changes mis-aligned"
+    },
+    {
+        "key": "ALTV-2071",
+        "summary": "ALTV Web V2: Responsive - Jobs Template - Editing job results in radio button selector being too large for radio button"
+    },
+    {
+        "key": "ALTV-2070",
+        "summary": "ALTV Web V2: Responsive - Jobs Template - Text for listed jobs is off screen"
+    },
+    {
+        "key": "ALTV-2069",
+        "summary": "ALTV Web V2: Responsive - Jobs Template - Create Job button should be spaced away from search bar"
+    },
+    {
+        "key": "ALTV-2068",
+        "summary": "ALTV Web V2: Responsive - Jobs Template - Filter and Sort By are not aligned as expected, they are on top of each other"
+    },
+    {
+        "key": "ALTV-2067",
+        "summary": "ALTV Web V2: Responsive - Homepage - Spacing between carousels and videos is too large"
+    },
+    {
+        "key": "ALTV-2065",
+        "summary": "ALTV Web V2: Notifications - Show more button appears when user has 1 or more notifications"
+    },
+    {
+        "key": "ALTV-2064",
+        "summary": "ALTV Web V2: Profile viewer - the icon is misaligned on \"Upload you first video\" button"
+    },
+    {
+        "key": "ALTV-2062",
+        "summary": "ALTV WEB V2: Responsive - Upload- Blogs description box not displaying correctly on smaller screen size"
+    },
+    {
+        "key": "ALTV-2059",
+        "summary": "ALTV Web V2: Profile - lower navbar flickers when you change from profile to videos/playlists/blogs"
+    },
+    {
+        "key": "ALTV-2058",
+        "summary": "ALTV Web V2: Responsive - Main page - hamburger menu doesn't disappear when you select the links"
+    },
+    {
+        "key": "ALTV-2057",
+        "summary": "ALTV Web V2: Dashboard - search bar is cut off in responsive mode"
+    },
+    {
+        "key": "ALTV-2056",
+        "summary": "ALTV Web V2: Main page - no link to Dugout in the hamburger menu"
+    },
+    {
+        "key": "ALTV-2055",
+        "summary": "ALTV Web V2: Three dot icon appearing in three dot menu in responsive mode"
+    },
+    {
+        "key": "ALTV-2054",
+        "summary": "ALTV Web V2: Media - video thumbnails are half black in responsive mode"
+    },
+    {
+        "key": "ALTV-2053",
+        "summary": "ALTV Web V2: Notifications - notifications misaligned in responsive mode"
+    },
+    {
+        "key": "ALTV-2052",
+        "summary": "ALTV Web V2: Main page - the link to Academy in hamburger menu doesn't link to the holding page (English/French)"
+    },
+    {
+        "key": "ALTV-2051",
+        "summary": "ALTV Web V2: Video detail - Up next list doesn't persist"
+    },
+    {
+        "key": "ALTV-2050",
+        "summary": "ALTV Web V2: Hashtags - two dugout hashtags present on the hashtag page"
+    },
+    {
+        "key": "ALTV-2049",
+        "summary": "ALTV Web V2: Blogs: Where blog title is long it can overlap on carousel for latest content"
+    },
+    {
+        "key": "ALTV-2048",
+        "summary": "ALTV Web V2: Profile creator - when user has a long bio, clicking \"More\" makes it smaller"
+    },
+    {
+        "key": "ALTV-2047",
+        "summary": "ALTV Web V2: Performing search returning some blank suggestions"
+    },
+    {
+        "key": "ALTV-2045",
+        "summary": "ALTV Web V2: Profile creator - website speed drops a lot when you sign in as a particular user"
+    },
+    {
+        "key": "ALTV-2043",
+        "summary": "ALTV Web V2: Dugout MENA - embed option missing from video player"
+    },
+    {
+        "key": "ALTV-2040",
+        "summary": "ALTV Web V2: Search icon very small on Safari and contains brackets"
+    },
+    {
+        "key": "ALTV-2037",
+        "summary": "ALTV Web V2: Media page - Live tab appears briefly then disappears when page loads"
+    },
+    {
+        "key": "ALTV-2036",
+        "summary": "ALTV Web V2: Media - the All breadcrumb is untranslated in arabic mode "
+    },
+    {
+        "key": "ALTV-2035",
+        "summary": "ALTV Web V2: There is arabic text for \"Follow\" but not \"Following\""
+    },
+    {
+        "key": "ALTV-2034",
+        "summary": "ALTV Web V2: Profile creator - some profiles still have \"Showreel\" heading"
+    },
+    {
+        "key": "ALTV-2033",
+        "summary": "ALTV Web V2: Profile creator - clicking on a profile loads the page at the bottom then scrolls it up"
+    },
+    {
+        "key": "ALTV-2032",
+        "summary": "ALTV Web V2: Shows - creator's User ID appears beside cursor when you hover over creator profile image"
+    },
+    {
+        "key": "ALTV-2030",
+        "summary": "ALTV Web V2: Home page - play icon is the wrong colour on \"Freestyle\" show in Recommended carousel"
+    },
+    {
+        "key": "ALTV-2026",
+        "summary": "ALTV Web V2: Dugout MENA - Videos jitter when I navigate away from page"
+    },
+    {
+        "key": "ALTV-2025",
+        "summary": "ALTV Web V2: MENA -> Video is stuck covering the web page for a couple of seconds before going back to normal size when exiting full screen"
+    },
+    {
+        "key": "ALTV-2023",
+        "summary": "ALTV Web V2: Video detail - shouldn't be able to report a comment more than once"
+    },
+    {
+        "key": "ALTV-2020",
+        "summary": "ALTV Web V2: Dugout MENA - arrows appearing on carousels when no more videos are available"
+    },
+    {
+        "key": "ALTV-2018",
+        "summary": "ALTV Web V2: Dugout channel - Navbar is smaller on the dugout channel than the rest of the site"
+    },
+    {
+        "key": "ALTV-2017",
+        "summary": "ALTV Web V2: Dugout channel - Chat option missing from top navbar"
+    },
+    {
+        "key": "ALTV-2014",
+        "summary": "ALTV Web V2: Notifications - it says \"in a few seconds\" when it should say \"a few seconds ago\""
+    },
+    {
+        "key": "ALTV-2013",
+        "summary": "ALTV Web V2: Library - newly followed creators have option to follow underneath their name"
+    },
+    {
+        "key": "ALTV-2012",
+        "summary": "ALTV Web V2: Library: I appear as a creator I follow in my library"
+    }
+]
