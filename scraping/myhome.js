@@ -20,6 +20,7 @@ let myHome = `https://www.myhome.ie/residential/dublin-15/property-for-sale-in-c
             let price = document.querySelectorAll('.price');
             let time = document.querySelectorAll('.time');
             // get the hotel data
+
             results.forEach((el, index) => {
                 // let txt = el.innerText.replace('\n','');
                 let obj = {
