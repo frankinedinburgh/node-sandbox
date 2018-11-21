@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const _ = require('lodash');
 
 let myHome = `https://property.trovit.ie/fernleigh-castleknock`;
 
@@ -11,26 +12,15 @@ let myHome = `https://property.trovit.ie/fernleigh-castleknock`;
     // get hotel details
     await page.waitForSelector('#wrapper_listing', {visible: true})
     try {
-        let hotelData = await page.evaluate(() => {
-            let list = [];
-            // get the hotel elements
-            let results = document.querySelector('#wrapper_listing').children;
-
-            // get the hotel data
-            // let txt = el.innerText.replace('\n','');
-
-            results.forEach((el, index) => {
-                let obj = {
-                    text: el.innerText || '',
-                }
-                list.push(obj);
-            });
+        let trovitData = await page.evaluate(() => {
+            let results = document.querySelectorAll('.js-item-title');
+            let list = _.chain(results).map(o => ({ text: o.innerText, href: o.href })).value();
 
             return list;
         });
 
-        console.log(hotelData);
-        saveToFile(JSON.stringify(hotelData, null, 4))
+        console.log(trovitData);
+        saveToFile(JSON.stringify(trovitData, null, 4))
     }
     catch (error) {
         console.log(error);
@@ -43,7 +33,7 @@ let myHome = `https://property.trovit.ie/fernleigh-castleknock`;
 
 
 function saveToFile(data) {
-    fs.writeFile('./playground/houses.json', data, function (err) {
+    fs.writeFile('./playground/trovit.json', data, function (err) {
         if (err) throw err;
         console.log('Saved!');
     });

@@ -32,6 +32,7 @@ function bytesToMegaBytes(val) {
 	}
 }
 
+
 module.exports = totalSize;
 
 

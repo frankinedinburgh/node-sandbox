@@ -1,32 +1,28 @@
 const path = require('path');
-const fs = require('fs');
+const pug = require('pug');
+const _ = require('lodash');
 const nodemailer = require('nodemailer');
 const env = path.join(__dirname, '../../.env');
 require('dotenv').config({path: env});
 const emails = require('./emails');
-const file = path.join(__dirname, '../../tickets.json')
-const tickets = JSON.parse(fs.readFileSync(file, 'utf8'));
 const size = require('../../modules/size');
-const dist = path.join(process.env.HOME, '/Sites/dugout-mena-v2/dist');
-const totalSize = size(dist);
+const compiledFunction = pug.compileFile(path.join(__dirname, './mail.pug'));
+const houses = require(path.relative(__dirname, 'playground/houses.json'));
+const trovit = require(path.relative(__dirname, 'playground/trovit.json'));
 
-const revision = require('../../modules/track-git-version.js');
-console.log(revision)
-process.exit();
 
-const message = function(arr) {
-    const list = arr.map(d => {
-        return `<li><a href="${process.env.JIRA_URL}/browse/${d.key}">${d.key}</a><br/><small><strong>Summary:</strong> ${d.summary}</small></li>`;
-    });
+let filteredHouses = _.chain(trovit)
+    .filter(d => /Fernleigh/g.test(d.text))
+    .value();
 
-    let footer = `<small><b>Size: </b></small>${totalSize}</small><br/>`;
-    footer += `<small><b>Size: </b></small>${totalSize}</small><br/>`
+// console.log(filteredHouses);
+// process.exit();
 
-    return `<div>
-					<ol>${list}</ol>
-					${footer}
-			</div>`
-}
+console.log(compiledFunction({
+    houses: houses,
+    trovit: filteredHouses
+}))
+
 
 
 //message(tickets)
@@ -40,9 +36,6 @@ const message = function(arr) {
 //	console.log(obj);
 //	process.exit();
 //});
-
-
-
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
@@ -58,20 +51,17 @@ const mailOptions = {
     from: `"${process.env.EMAIL_ACCOUNT} " <${process.env.EMAIL_ACCOUNT}>`, // sender address (who sends)
     to: emails.to,
     cc: emails.cc,
-    subject: 'TEST AUTOMATED EMAIL', // Subject line
-    html: message(tickets) // html body
+    subject: 'Properties for sale in Fernleigh', // Subject line
+    html: compiledFunction({
+        trovit: filteredHouses
+    })
 };
 
 // send mail with defined transport object
 transporter.sendMail(mailOptions, function(error, info){
     if(error) return console.log(error);
-
     console.log('Message sent: ' + info.response);
 });
-
-
-
-
 
 process.on('exit', (code) => {
     console.log(`EMAIL has been sent at ${process.env.EMAIL_ACCOUNT}`);

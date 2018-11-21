@@ -26,11 +26,11 @@ async function banking() {
 
 		let form = document.getElementById('loginstep2Form').innerText;
 		form = form.split('\n')
-							 .filter(Boolean)
-							 .filter(d => /Digit/.test(d))
-							 .map(d => d.replace('Digit ', ''))
-							 .map(d => parseInt(d))
-							 .map(d => pass[d]);
+				 .filter(Boolean)
+				 .filter(d => /Digit/.test(d))
+				 .map(d => d.replace('Digit ', ''))
+				 .map(d => parseInt(d))
+				 .map(d => pass[d]);
 		return form;
 	});
 
