@@ -1,17 +1,20 @@
-import React, { Comonent, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import db from './db/gaurdian';
 import films from './db/imdb';
 
-class MyComponent extends Comonent {
+class MyComponent extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.films = films;
+		this.db = db;
 	}
 
 	render() {
-		const { spotlight } = db;
+		const { spotlight } = this.db;
 		const listItems = spotlight.map((o, index) => <option key={index} value={o}>{o}</option>)
-		const film = films.map((o, index) => <option key={index} value={o}>{o}</option>)
+		const film = this.films.map((o, index) => <option key={index} value={o}>{o}</option>)
 
 		return (
 			<Fragment>
