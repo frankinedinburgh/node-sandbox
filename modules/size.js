@@ -17,8 +17,6 @@ const walkSync = (dir, filelist = []) => {
 	return filelist;
 };
 
-
-
 function totalSize(dir) {
 	let build = walkSync(dir);
 	build = build.map(value => value.size);

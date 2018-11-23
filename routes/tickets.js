@@ -10,7 +10,7 @@ const auth = Buffer.from(`${process.env.JIRA_USERNAME}:${process.env.JIRA_PASSWO
 
 router.get('/tickets/', (req, res) => {
 
-	console.log(`${process.env.JIRA_URL}/rest/api/2/search?jql=${BACKLOG}`);
+	res.set('Access-Control-Allow-Origin', '*')
 
 	const instance = axios({
 		method: 'get',

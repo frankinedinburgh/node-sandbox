@@ -69,24 +69,24 @@ class MyComponent extends Component {
 			<Fragment>
 				<Table>
 					<thead>
-						<tr>
-							<th onClick={() => { this.onSortHandler('key') }}>Key</th>
-							<th onClick={() => { this.onSortHandler('summary') }}>Summary</th>
-							<th onClick={() => { this.onSortHandler('assignee') }}>Assignee</th>
-							<th onClick={() => { this.onSortHandler('status') }}>Status</th>
-						</tr>
+					<tr>
+						<th onClick={() => { this.onSortHandler('key') }}>Key</th>
+						<th onClick={() => { this.onSortHandler('summary') }}>Summary</th>
+						<th onClick={() => { this.onSortHandler('assignee') }}>Assignee</th>
+						<th onClick={() => { this.onSortHandler('status') }}>Status</th>
+					</tr>
 					</thead>
 					<tbody>
-						{ tickets &&
-							tickets.map((d, index) =>
-								<tr key={`row-${index}`}>
-									<td key={`key-${index}`}><a href={`https://emergentdatagroup.atlassian.net/browse/${d.key}`}>{d.key}</a></td>
-									<td key={`summary-${index}`}>{d.summary}</td>
-									<td key={`assignee-${index}`}>{d.assignee}</td>
-									<td key={`status-${index}`}>{d.status}</td>
-								</tr>
-							)
-						}
+					{ tickets &&
+					tickets.map((d, index) =>
+						<tr key={`row-${index}`}>
+							<td key={`key-${index}`}><a href={`https://emergentdatagroup.atlassian.net/browse/${d.key}`}>{d.key}</a></td>
+							<td key={`summary-${index}`}>{d.summary}</td>
+							<td key={`assignee-${index}`}>{d.assignee}</td>
+							<td key={`status-${index}`}>{d.status}</td>
+						</tr>
+					)
+					}
 					</tbody>
 				</Table>
 			</Fragment>
