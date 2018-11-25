@@ -4,31 +4,45 @@ const _ = require('lodash');
 
 
 async function fn() {
-	let URL = `https://www.theguardian.com/international`;
-	const CLICK_1 = '#top > div.site-message.js-site-message.js-double-site-message.site-message--banner.site-message--double-banner > div.js-first-pv-consent-site-message.site-message--first-pv-consent > div > div > div.site-message__copy.js-site-message-copy.u-cf > div.site-message--first-pv-consent__actions > button';
-	const browser = await puppeteer.launch({ headless: true });
+	let URL = `https://www.imdb.com/`;
+	const pageOpts = {
+	    timeout: 0,
+        waitUntil: 'networkidle2'
+	};
+	const browserOpts = {
+        headless: true,
+        devtools: false
+    };
+
+	const browser = await puppeteer.launch(browserOpts);
 	const page = await browser.newPage();
-	await page.goto(URL);
+	await page.goto(URL, pageOpts);
+	await page.waitForSelector('#navTitleMenu');
+	await page.hover('#navTitleMenu');
+    await page.waitForSelector('#navMenu1', { visible: true }).catch(err => { console.log('There has been an erro here')});
+	await page.click('#navMenu1 > div:nth-child(2) > ul:nth-child(2) > li:nth-child(1) > a');
+    await page.waitForNavigation();
+    await page.waitFor(10000);
+    await page.title();
 
-	// get hotel details
-	await page.waitForSelector(CLICK_1, {visible: true})
-	await page.click(CLICK_1)
+    await page.$eval('h4', function(heading) {
+        return heading.innerText;
+    }).then(res => { console.log(res)})
+    browser.close();
+    // await page.$$('#cinemas-at-list').catch(err => { console.log(err )});
+    //
+    //
+    //
+	// // await page.click('#top > div.site-message.js-site-message.site-message--fiv-banner.site-message--banner > div > div > div.site-message__copy.js-site-message-copy.u-cf > div.fiv-banner__close > button');
+    //
+    // let data = await page.evaluate(() => {
+    //     let els = document.querySelectorAll('#cinemas-at-list .list_item h4');
+    //     return _.map(els, 'innerText');
+    // });
+    // console.log(data)
 
-	const inputElement = await page.$('#headlines > div > div.fc-container--rolled-up-hide.fc-container__body');
-	await inputElement.click();
 
-	try {
-		let data = await page.evaluate(() => {
-			let elems = '#headlines > div > div.fc-container--rolled-up-hide.fc-container__body > div:nth-child(1) > ul li';
-			elems = document.querySelectorAll(elems);
-			return _.map(elems, 'innerText');
-		});
-		console.log(data);
-	} catch (error) {
-		console.log(error);
-		browser.close();
-	}
-	browser.close();
+    // browser.close();
 }
 
 

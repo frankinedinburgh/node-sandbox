@@ -36,10 +36,8 @@ let myHome = `https://www.myhome.ie/residential/dublin-15/property-for-sale-in-c
             return list;
         });
 
-        console.log(hotelData);
         saveToFile(JSON.stringify(hotelData, null, 4))
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         browser.close();
     }

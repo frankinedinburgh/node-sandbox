@@ -5,12 +5,11 @@ const fs = require('fs');
 async function priceChanges() {
     const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
-		let location = 'castleknock';
-		let myHome = `https://www.myhome.ie/pricechanges/dublin/${location}`;
+    let location = 'castleknock';
+    let myHome = `https://www.myhome.ie/pricechanges/dublin/${location}`;
     await page.goto(myHome);
-
-    // get price change details
     await page.waitForSelector('.propertyCardInfo', {visible: true})
+
     try {
         let hotelData = await page.evaluate(() => {
             let list = [];

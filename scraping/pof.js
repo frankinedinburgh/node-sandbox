@@ -29,9 +29,6 @@ let url = `https://www.pof.com/`;
         height: dimensions.height
     });
 
-
-
-
     try {
         console.log('Dimensions:', dimensions);
 
