@@ -8,17 +8,17 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const faker = require('faker');
 
-
 const text =  JSON.stringify({
 	title: faker.name.jobTitle(),
-	excerpt: faker.lorem.lines(3),
+	company: faker.company.companyName(),
+	//excerpt: faker.lorem.lines(3),
 	description: faker.lorem.sentences(6, ' '),
-	tags: faker.lorem.words(3).split(' '),
+	//tags: faker.lorem.words(3).split(' '),
 	image: faker.image.imageUrl(),
 
 }, null, 4);
 
-fs.writeFile(path.join(__dirname, '../faker.txt'), text, function(err) {
+fs.writeFile(path.join(process.env.DIR, 'playground/faker.txt'), text, function(err) {
 	if(err) {
 		return console.log(err);
 	}
@@ -28,7 +28,7 @@ fs.writeFile(path.join(__dirname, '../faker.txt'), text, function(err) {
 	filename = filename[filename.length -1];
 	const newFileName = faker.lorem.slug(1);
 
-	const cm = `cd ${path.join(__dirname, '../images/')} && curl -o ${newFileName}.jpeg ${image}`;
+	const cm = `cd ${path.join(process.env.DIR, 'playground/')} && curl -o ${newFileName}.jpeg ${image}`;
 
 	command(cm , (error, data) => {
 		if(error) return console.log(`There is an error \n${cm}`)

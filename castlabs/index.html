@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<video id="test_video0" width="400" controls>
+    <source src="http://demo.castlabs.com/tmp/text0.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+
+</body>
+
+
+<script>
+	// https://riptutorial.com/javascript/example/32392/iterating-through-an-arraybuffer
+
+	function ArrayBufferCursor(arrayBuffer){
+		this.dataview = new DataView(arrayBuffer, 0);
+		this.size = arrayBuffer.byteLength;
+		this.index = 0;
+	}
+
+	ArrayBufferCursor.prototype = {
+		constructor: ArrayBufferCursor,
+		hasNext: function (){
+			return this.index < this.size;
+		},
+		next: function (type){
+			switch (type) {
+				case 'Uint8':
+					var result = this.dataview.getUint8(this.index);
+					this.index += 1;
+					return result;
+				case 'Int16':
+					var result = this.dataview.getInt16(this.index, true);
+					this.index += 2;
+					return result;
+				case 'Uint16':
+					var result = this.dataview.getUint16(this.index, true);
+					this.index += 2;
+					return result;
+				case 'Int32':
+					var result = this.dataview.getInt32(this.index, true);
+					this.index += 4;
+					return result;
+				case 'Uint32':
+					var result = this.dataview.getUint32(this.index, true);
+					this.index += 4;
+					return result;
+				case 'Float':
+				case 'Float32':
+					var result = this.dataview.getFloat32(this.index, true);
+					this.index += 4;
+					return result;
+				case 'Double':
+				case 'Float64':
+					var result = this.dataview.getFloat64(this.index, true);
+					this.index += 8;
+					return result;
+				default:
+					throw new Error("Unknown datatype");
+			}
+		}
+	}
+
+
+	function requestMp4(url){
+		let fileReader = new FileReader(),
+			xhr = new XMLHttpRequest(),
+			blob;
+
+
+		fetchAB(url, function (data){
+			blob = new Blob([ data ], {type: "video/mp4"});
+			fileReader.onload = function (evt){
+				let result = evt.target.result;
+				let cursor = new ArrayBufferCursor(result);
+				let dataTypes = [ 'Uint8', 'Int16', 'Uint16', 'Int32', 'Uint32', 'Float', 'Float32', 'Double', 'Float64' ];
+				dataTypes.map(function (d){
+					console.log(cursor.next(d));
+
+
+
+
+				})
+
+			};
+			fileReader.readAsArrayBuffer(blob);
+		})
+
+
+	}
+
+	// https://github.com/gpac/mp4box.js/issues/113
+
+	// Need to be specific for Blink regarding codecs
+	// ./mp4info frag_bunny.mp4 | grep Codec
+	// mdls -name kMDItemCodecs text0.mp4
+
+
+	var video = document.querySelector('video');
+
+	var assetURL = './text0.mp4';
+	// Need to be specific for Blink regarding codecs
+	// ./mp4info frag_bunny.mp4 | grep Codec
+	//var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+	var mimeCodec = 'video/mp4';
+
+	if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
+		var mediaSource = new MediaSource();
+		//console.log(mediaSource.readyState); // closed
+		video.src = URL.createObjectURL(mediaSource);
+		mediaSource.addEventListener('sourceopen', sourceOpen);
+	} else {
+		console.error('Unsupported MIME type or codec: ', mimeCodec);
+	}
+
+	function sourceOpen(){
+		//console.log(this.readyState); // open
+		var mediaSource = this;
+		var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+		fetchAB(assetURL, function (buf){
+			sourceBuffer.addEventListener('updateend', function (_){
+				mediaSource.endOfStream();
+				debugger;
+				video.play();
+				//console.log(mediaSource.readyState); // ended
+			});
+			sourceBuffer.appendBuffer(buf);
+		});
+	};
+
+	function fetchAB(url, cb){
+		console.log(url);
+		var xhr = new XMLHttpRequest;
+		xhr.open('get', url);
+		xhr.responseType = 'arraybuffer';
+		xhr.onload = function (){
+			if (xhr.status !== 200) throw Error('unable to fetch mp4');
+			cb(xhr.response);
+		};
+		xhr.send();
+	};
+
+
+	//requestMp4("./text0.mp4");
+
+</script>
+
