@@ -3,149 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta urls="[https://riptutorial.com/javascript/topic/417/binary-data, https://blog.mgechev.com/2015/02/06/parsing-binary-protocol-data-javascript-typedarrays-blobs/]"/>
 </head>
 <body>
-<video id="test_video0" width="400" controls>
-    <source src="http://demo.castlabs.com/tmp/text0.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-</video>
+<input type="file" value/>
+<textarea name="result" id="" cols="30" rows="10"></textarea>
 
-</body>
 
+<div id="demo"></div>
 
 <script>
-	// https://riptutorial.com/javascript/example/32392/iterating-through-an-arraybuffer
 
-	function ArrayBufferCursor(arrayBuffer){
-		this.dataview = new DataView(arrayBuffer, 0);
-		this.size = arrayBuffer.byteLength;
-		this.index = 0;
-	}
+	// byte = 8 bits
+	// 00101100
 
-	ArrayBufferCursor.prototype = {
-		constructor: ArrayBufferCursor,
-		hasNext: function (){
-			return this.index < this.size;
-		},
-		next: function (type){
-			switch (type) {
-				case 'Uint8':
-					var result = this.dataview.getUint8(this.index);
-					this.index += 1;
-					return result;
-				case 'Int16':
-					var result = this.dataview.getInt16(this.index, true);
-					this.index += 2;
-					return result;
-				case 'Uint16':
-					var result = this.dataview.getUint16(this.index, true);
-					this.index += 2;
-					return result;
-				case 'Int32':
-					var result = this.dataview.getInt32(this.index, true);
-					this.index += 4;
-					return result;
-				case 'Uint32':
-					var result = this.dataview.getUint32(this.index, true);
-					this.index += 4;
-					return result;
-				case 'Float':
-				case 'Float32':
-					var result = this.dataview.getFloat32(this.index, true);
-					this.index += 4;
-					return result;
-				case 'Double':
-				case 'Float64':
-					var result = this.dataview.getFloat64(this.index, true);
-					this.index += 8;
-					return result;
-				default:
-					throw new Error("Unknown datatype");
+	//var buffer = new ArrayBuffer(8); // 8 x 8 = 64; 64 % 32 = 2
+	//var view = new Int16Array(buffer); // a number stored with 32 bits
+	//view[ 0 ] = 3;
+	//view[ 1 ] = 8;
+	//console.log(view);
+	//console.log(buffer);
+
+
+	document.querySelector('input[type="file"]').addEventListener('change', ReadFile);
+
+
+	function decodeUtf8(arrayBuffer){
+		var result = "";
+		var i = 0;
+		var c = 0;
+		var c1 = 0;
+		var c2 = 0;
+
+		var data = new Uint8Array(arrayBuffer);
+
+		// If we have a BOM skip it
+		if (data.length >= 3 && data[ 0 ] === 0xef && data[ 1 ] === 0xbb && data[ 2 ] === 0xbf) {
+			i = 3;
+		}
+
+		while (i < data.length) {
+			c = data[ i ];
+
+			if (c < 128) {
+				result += String.fromCharCode(c);
+				i++;
+			} else if (c > 191 && c < 224) {
+				if (i + 1 >= data.length) {
+					throw "UTF-8 Decode failed. Two byte character was truncated.";
+				}
+				c2 = data[ i + 1 ];
+				result += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+				i += 2;
+			} else {
+				if (i + 2 >= data.length) {
+					throw "UTF-8 Decode failed. Multi byte character was truncated.";
+				}
+				c2 = data[ i + 1 ];
+				c3 = data[ i + 2 ];
+				result += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+				i += 3;
 			}
 		}
+		return result;
 	}
 
+	function ReadFile(){
+		if (!this.files) return;
+		var output = document.getElementsByTagName("textarea")[ 0 ];
 
-	function requestMp4(url){
-		let fileReader = new FileReader(),
-			xhr = new XMLHttpRequest(),
-			blob;
+		if (this.files.length === 0) {
+			output.value = 'No file selected';
+			window.setTimeout(ReadFile, 1000);
+			return;
+		}
 
-
-		fetchAB(url, function (data){
-			blob = new Blob([ data ], {type: "video/mp4"});
-			fileReader.onload = function (evt){
-				let result = evt.target.result;
-				let cursor = new ArrayBufferCursor(result);
-				let dataTypes = [ 'Uint8', 'Int16', 'Uint16', 'Int32', 'Uint32', 'Float', 'Float32', 'Double', 'Float64' ];
-				dataTypes.map(function (d){
-					console.log(cursor.next(d));
-
-
+		var fr = new FileReader();
+		fr.onload = function (e){
+			var data = fr.result;
+			var arrayBuffer = new Uint8Array(data);
+			var text = decodeUtf8(arrayBuffer);
 
 
+			output.value = JSON.stringify(arrayBuffer, null, 4);
+
+			if (output.value.length < 1) return;
+
+			if (text) {
+				parseXML(text, function (res){
+					debugger;
 				})
+			}
 
-			};
-			fileReader.readAsArrayBuffer(blob);
-		})
+			for (let index of arrayBuffer) {
+				console.log('There are still items to process => ' + index);
+			}
 
-
-	}
-
-	// https://github.com/gpac/mp4box.js/issues/113
-
-	// Need to be specific for Blink regarding codecs
-	// ./mp4info frag_bunny.mp4 | grep Codec
-	// mdls -name kMDItemCodecs text0.mp4
-
-
-	var video = document.querySelector('video');
-
-	var assetURL = './text0.mp4';
-	// Need to be specific for Blink regarding codecs
-	// ./mp4info frag_bunny.mp4 | grep Codec
-	//var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-	var mimeCodec = 'video/mp4';
-
-	if ('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec)) {
-		var mediaSource = new MediaSource();
-		//console.log(mediaSource.readyState); // closed
-		video.src = URL.createObjectURL(mediaSource);
-		mediaSource.addEventListener('sourceopen', sourceOpen);
-	} else {
-		console.error('Unsupported MIME type or codec: ', mimeCodec);
-	}
-
-	function sourceOpen(){
-		//console.log(this.readyState); // open
-		var mediaSource = this;
-		var sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
-		fetchAB(assetURL, function (buf){
-			sourceBuffer.addEventListener('updateend', function (_){
-				mediaSource.endOfStream();
-				debugger;
-				video.play();
-				//console.log(mediaSource.readyState); // ended
-			});
-			sourceBuffer.appendBuffer(buf);
-		});
-	};
-
-	function fetchAB(url, cb){
-		console.log(url);
-		var xhr = new XMLHttpRequest;
-		xhr.open('get', url);
-		xhr.responseType = 'arraybuffer';
-		xhr.onload = function (){
-			if (xhr.status !== 200) throw Error('unable to fetch mp4');
-			cb(xhr.response);
 		};
-		xhr.send();
-	};
+
+		fr.readAsArrayBuffer(this.files[ 0 ]);
+	}
 
 
-	//requestMp4("./text0.mp4");
+		function parseXML(text, cb){
+		var parser, xmlDoc;
+		if (window.DOMParser) {
+			parser = new DOMParser();
+			xmlDoc = parser.parseFromString(text, "text/xml");
+		} else {
+			xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+			xmlDoc.async = false;
+			xmlDoc.loadXML(text);
+		}
+		return cb(xmlDoc)
+	}
+
+	// FileReader API
+	// ArrayBuffer
+	// Blob
 
 </script>
+</body>
+</html>
 
