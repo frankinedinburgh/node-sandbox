@@ -19,9 +19,15 @@ async function indeed() {
 		let results = await page.evaluate(() => {
 			let companies = [];
 			let info = document.querySelectorAll('span.company');
+			let title = document.querySelectorAll('.jobtitle');
 			info.forEach((el, index) => {
 				console.log(el.innerText)
-				companies.push(el.innerText);
+				console.log(title[index].innerText)
+				companies.push({
+					title: title[ index ].innerText, 
+					company: el.innerText
+				});
+
 			});
 
 			return companies;
@@ -40,7 +46,7 @@ async function indeed() {
 function saveToFile(data) {
 	fs.writeFile('./playground/jobs.json', data, function (err) {
 		if (err) throw err;
-		console.log('Saved!');
+		console.log('Saved file to ./playground/jobs.json!');
 	});
 }
 

@@ -25,10 +25,58 @@
 	//console.log(buffer);
 
 
-	document.querySelector('input[type="file"]').addEventListener('change', ReadFile);
+		//document.querySelector('input[type="file"]').addEventListener('change', function (e){
+		//	ReadFile(e, function (res){
+		//		console.log(res, e.target)
+		//	})
+		//});
 
 
-	function decodeUtf8(arrayBuffer){
+    document.querySelector('input[type="file"]').addEventListener('change', function (e){
+        var self = this;
+        ReadFile(self, function (err, res){
+            if (err) throw Error(err)
+            if (!self.files) return;
+            var arrayBuffer = new Uint8Array(res);
+
+            if (self.files.length < 1) {
+                printResult('No file selected')
+                window.setTimeout(ReadFile, 1000);
+                return;
+            }
+
+            printResult(arrayBuffer)
+
+        })
+    });
+
+    function printResult(arrayBuffer) {
+        var output = document.getElementsByTagName("textarea")[ 0 ];
+            output.value = JSON.stringify(arrayBuffer, null, 4);
+            console.log('Buffer length => ' + (arrayBuffer.byteLength));
+			decodeUtf8(arrayBuffer, function(res) {
+                console.log(res);
+
+                var dv = new DataView(arrayBuffer.buffer);
+
+                var id = [];
+                for (var i = 4; i < 8; i++) {
+                    id.push(String.fromCharCode(dv.getUint8(i)));
+                }
+                var name = id.join("");
+
+                console.log('Found file of type ' + name)
+
+
+                //parseXML(res, function (data){
+                //    console.log(data.getElementsByTagName('xml'))
+                //})
+
+			});
+    }
+
+	function decodeUtf8(arrayBuffer, callback){
+
 		var result = "";
 		var i = 0;
 		var c = 0;
@@ -36,7 +84,6 @@
 		var c2 = 0;
 
 		var data = new Uint8Array(arrayBuffer);
-
 		// If we have a BOM skip it
 		if (data.length >= 3 && data[ 0 ] === 0xef && data[ 1 ] === 0xbb && data[ 2 ] === 0xbf) {
 			i = 3;
@@ -65,58 +112,30 @@
 				i += 3;
 			}
 		}
-		return result;
+		return callback(result);
 	}
 
-	function ReadFile(){
-		if (!this.files) return;
-		var output = document.getElementsByTagName("textarea")[ 0 ];
-
-		if (this.files.length === 0) {
-			output.value = 'No file selected';
-			window.setTimeout(ReadFile, 1000);
-			return;
-		}
-
+	function ReadFile(evt, cb){
 		var fr = new FileReader();
-		fr.onload = function (e){
-			var data = fr.result;
-			var arrayBuffer = new Uint8Array(data);
-			var text = decodeUtf8(arrayBuffer);
-
-
-			output.value = JSON.stringify(arrayBuffer, null, 4);
-
-			if (output.value.length < 1) return;
-
-			if (text) {
-				parseXML(text, function (res){
-					debugger;
-				})
-			}
-
-			for (let index of arrayBuffer) {
-				console.log('There are still items to process => ' + index);
-			}
-
-		};
-
-		fr.readAsArrayBuffer(this.files[ 0 ]);
+		fr.onload = function (e){ cb(null, fr.result) };
+		fr.onerror = function (e){ cb('There was an error reading file') };
+		fr.readAsArrayBuffer(evt.files[0]);
 	}
 
+    function parseXML(text, cb){
 
-		function parseXML(text, cb){
-		var parser, xmlDoc;
-		if (window.DOMParser) {
-			parser = new DOMParser();
-			xmlDoc = parser.parseFromString(text, "text/xml");
-		} else {
-			xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
-			xmlDoc.async = false;
-			xmlDoc.loadXML(text);
-		}
-		return cb(xmlDoc)
-	}
+        var parser, xmlDoc;
+        if (window.DOMParser) {
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(text, "text/xml");
+        } else {
+            xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async = false;
+            xmlDoc.loadXML(text);
+        }
+
+        return cb(xmlDoc)
+    }
 
 	// FileReader API
 	// ArrayBuffer
