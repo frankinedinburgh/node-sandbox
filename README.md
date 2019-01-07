@@ -32,3 +32,8 @@ the jira directory contains snippets for calling the JIRA api
 
 
 
+07/01/2019
+- [learning to use parcel js](https://parceljs.org/)
+
+
+
