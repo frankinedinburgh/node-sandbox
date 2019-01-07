@@ -7,4 +7,5 @@ faker.txt
 jira_*
 images
 modules/emails.js
+config
 
