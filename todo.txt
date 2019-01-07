@@ -1,2 +1,0 @@
-scrape a list of film composers
-https://www.imdb.com/list/ls058974580/

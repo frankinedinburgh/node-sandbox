@@ -9,8 +9,7 @@ const FIRST_SELECTOR = '#_evidon-accept-button';
 const SECOND_SELECTOR = '#KeywordSearch';
 const THIRD_SELECTOR = '#JobActivityWrapper > div > div > header > nav > ul li';
 const FOURTH_SELECTOR = '#_evidon-accept-button';
-console.log(process.env)
-process.exit();
+
 
 (async () => {
 	const browser = await puppeteer.launch({

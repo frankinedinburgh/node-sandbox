@@ -40,7 +40,7 @@ async function priceChanges() {
 }
 
 function saveToFile(data) {
-    fs.writeFile('./playground/price-changes.json', data, function (err) {
+    fs.writeFile('./db/price-changes.json', data, function (err) {
         if (err) throw err;
         console.log('Saved!');
     });

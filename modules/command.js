@@ -13,8 +13,4 @@ const result = (command, cb) => {
 	});
 }
 
-
-
-
-
 module.exports = result;

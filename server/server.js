@@ -20,8 +20,6 @@ let Todo = mongoose.model('Todos', {
 })
 
 
-
-
 let newTodo = new Todo({
 	text: 'Save to the database'
 });
@@ -31,7 +29,7 @@ newTodo.save().then((doc) => {
 	console.log('Saved todo', doc)
 }, (e) => {
 	console.log('unable to save todo')
-})
+});
 
 
 

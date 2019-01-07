@@ -48,7 +48,7 @@ let myHome = `https://www.myhome.ie/residential/dublin-15/property-for-sale-in-c
 
 
 function saveToFile(data) {
-    fs.writeFile('./playground/houses.json', data, function (err) {
+    fs.writeFile('./db/myhome.json', data, function (err) {
         if (err) throw err;
         console.log('Saved!');
     });

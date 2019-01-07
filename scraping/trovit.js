@@ -33,8 +33,8 @@ let myHome = `https://property.trovit.ie/fernleigh-castleknock`;
 
 
 function saveToFile(data) {
-    fs.writeFile('./playground/trovit.json', data, function (err) {
+    fs.writeFile('./db/trovit.json', data, function (err) {
         if (err) throw err;
-        console.log('Saved!');
+        console.log('Saved!' + `${__dirname}`);
     });
 }
