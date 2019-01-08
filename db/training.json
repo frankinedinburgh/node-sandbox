@@ -1,0 +1,149 @@
+[
+  {
+    "date": "01/08/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "12 x 400 with 45 sec rec",
+    "notes": null
+  },
+  {
+    "date": "01/12/2019",
+    "day": "Saturday",
+    "session": "Race",
+    "details": "BHAA BOI XC Tymon Park Dublin",
+    "notes": "6km XC"
+  },
+  {
+    "date": "01/12/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "5 x 1mile @ 10km effort",
+    "notes": "Usual Mile Route. Jog around the goalposts active recovery"
+  },
+  {
+    "date": "01/13/2019",
+    "day": "Sunday",
+    "session": "Race",
+    "details": "Leinster Masters, Gowran Kilkenny",
+    "notes": "6 km XC"
+  },
+  {
+    "date": "01/15/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "8 x 600 with 200m jog rec",
+    "notes": "Active Recovery"
+  },
+  {
+    "date": "01/19/2019",
+    "day": "Saturday",
+    "session": "Race",
+    "details": "BHAA Eir XC, Cherryfield Park, Dublin",
+    "notes": "5 miles XC"
+  },
+  {
+    "date": "01/19/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "2 x 2.5 Km @ 10k 3 x 1 K @ 3k",
+    "notes": "Acres loop 2 mins rec between reps"
+  },
+  {
+    "date": "01/22/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "4 sets of 400 @ Half Marathon Pace 400 @ 10k pace 400 @ 5k-3k pace",
+    "notes": "ALL continuous no static recovery. Use same 400m start"
+  },
+  {
+    "date": "01/26/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "8 x 1k @ 10k effort",
+    "notes": "Kyber Hill  - run from bottom to top and jog back down for recovery"
+  },
+  {
+    "date": "01/27/2019",
+    "day": "Sunday",
+    "session": "Race",
+    "details": "Raheny 5 mile",
+    "notes": null
+  },
+  {
+    "date": "01/29/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "3 sets of 4 x 400 with reduced recoveries, 45 secs, 30 secs, 15 secs",
+    "notes": "400m jog rec between sets"
+  },
+  {
+    "date": "02/02/2019",
+    "day": "Saturday",
+    "session": "Race",
+    "details": "BHAA Garda XC Phoenix Park",
+    "notes": "4 miles XC"
+  },
+  {
+    "date": "02/03/2019",
+    "day": "Sunday",
+    "session": "Race",
+    "details": "National Masters XC National Intermediates XC Dundalk I.T.",
+    "notes": "6 km XC / 8 km XC"
+  },
+  {
+    "date": "02/05/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "5 sets of 600m 200m jog recovery 400m",
+    "notes": "75 sec rec between sets"
+  },
+  {
+    "date": "02/09/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "2 x 2.5 Km @ 10k 3 x 1 K @ 3k",
+    "notes": "Acres loop 90 sec rec between reps"
+  },
+  {
+    "date": "02/12/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "12 x 400 with 45 sec rec",
+    "notes": null
+  },
+  {
+    "date": "02/16/2019",
+    "day": "Saturday",
+    "session": "Race",
+    "details": "BHAA ALSAA Dublin Airport",
+    "notes": "5 miles XC"
+  },
+  {
+    "date": "02/16/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "6 miles continuous",
+    "notes": "Continuous run on hill loop. Surge every mile on flat for 30 seconds"
+  },
+  {
+    "date": "02/19/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "8 x 600 with 200m jog rec",
+    "notes": "Active recovery"
+  },
+  {
+    "date": "02/23/2019",
+    "day": "Saturday",
+    "session": "Phoenix Park",
+    "details": "3 x 2.5 Km @ 10k 3 x 1 K @ 3k",
+    "notes": "Acres loop 2 min rec between reps"
+  },
+  {
+    "date": "02/26/2019",
+    "day": "Tuesday",
+    "session": "Track",
+    "details": "400 w 60sec 800 w 75sec 1200 w 90sec 1200 w 90sec 800 w 75sec 400",
+    "notes": "static recovery"
+  }
+]

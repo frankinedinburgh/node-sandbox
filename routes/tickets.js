@@ -37,7 +37,7 @@ router.get('/tickets/', (req, res) => {
 		}
 		const { issues } = response.data;
         let results = _.chain(issues).map(d => ({
-			key: d.key,
+						key: d.key,
             summary: d.fields.summary,
             assignee: d.fields.assignee.displayName,
             status: d.fields.status.name

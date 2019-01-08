@@ -1,5 +1,8 @@
 import 'babel-polyfill'
 import './src/app'
+import './src/buffers'
+import './src/examples/prototype_inheritence'
+import './src/examples/uint8array'
 console.log('you are here')
 
 // async function fetchLaunches(url){

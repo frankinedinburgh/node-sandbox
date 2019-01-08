@@ -32,8 +32,16 @@ the jira directory contains snippets for calling the JIRA api
 
 
 
-07/01/2019
-- [learning to use parcel js](https://parceljs.org/)
+
+- [07/01/2019 => learning to use parcel js](https://parceljs.org/)
+  
+  Use parcel for transpiling all client side javascript files 
+
+- [08/01/2019 => Mongoose 101](https://mongoosejs.com/)
+- [08/01/2019 => Mongoose 102](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose)
+   
+  learn how to build a CRUD application with node, ongoose and express
+
 
 
 
