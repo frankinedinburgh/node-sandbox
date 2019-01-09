@@ -39,9 +39,12 @@ the jira directory contains snippets for calling the JIRA api
 
 - [08/01/2019 => Mongoose 101](https://mongoosejs.com/)
 - [08/01/2019 => Mongoose 102](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose)
-   
+- [09/01/2019 - 10/01/2019 => Build a CRUD application with Mongoose](https://codeburst.io/writing-a-crud-app-with-node-js-and-mongodb-e0827cbbdafb)
+  
   learn how to build a CRUD application with node, ongoose and express
 
 
 
 
+ ### Routes to test
+ 

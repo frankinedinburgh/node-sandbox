@@ -9,8 +9,8 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 
 app.set('view engine', 'pug');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());// for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use((req, res, next) => {
     let now = new Date().toString()
     console.log(now)
@@ -23,12 +23,13 @@ const stravaRoute = require('./routes/strava')
 const emailRoute = require('./routes/email')
 const ticketsRoute = require('./routes/tickets')
 const trainingRoute = require('./routes/training')
+const propertyRoute = require('./routes/property')
 
 
 /**
  * @description setup mongoose configurations
  */
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 mongoose.set('debug', function (collectionName, method, query, doc, options){
 	console.log('collectionName', collectionName)
@@ -102,8 +103,22 @@ app.get('/strava/', stravaRoute)
 app.get('/tickets/', ticketsRoute)
 app.get('/email/', emailRoute)
 app.get('/training/', trainingRoute)
+app.get('/property/', propertyRoute)
 
 
+
+
+const Training = require('./models/training.model')
+app.get('/testing/', function(req, res){
+	Training.find({}).exec(function (err, books){
+			if (err) {
+				res.send('error occured')
+			} else {
+				console.log(books);
+				res.json(books);
+			}
+		});
+})
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

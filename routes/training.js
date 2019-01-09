@@ -13,8 +13,13 @@ const trainingController = require('../controllers/training.controller');
  * @todo fetch training data from database
  */
 
-
+router.get('/training/:id?', function (req, res){
+	console.log(req.params);
+	res.send('user ');
+});
 router.get('/training/', trainingController.test);
+//router.get('/training/:id', trainingController.findOne);
+
 router.post('/training/create', trainingController.create);
 
 module.exports = router;
