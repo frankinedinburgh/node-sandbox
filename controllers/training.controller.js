@@ -8,14 +8,15 @@ const test = function (req, res){
 	});
 };
 
-const findOne = function(req, res) {
-	Training.findOne({
-		_id: req.params.id
-	}).exec(function (err, session){
-		if (err) return res.send('error occured');
-		console.log('Sucessfully requested one item');
-		res.json(session);
-	});
+const findById = function(req, res) {
+
+	res.send('Sucessfully requested')
+	//Training.findById(req.params.id).exec(function (err, session){
+	//	if (err) return res.send('error occured');
+	//	console.log('Sucessfully requested one item');
+	//	res.send('Sucessfully requested one item');
+	//	//res.json(session);
+	//});
 };
 
 const create = function(req, res, next) {
@@ -37,6 +38,6 @@ const create = function(req, res, next) {
 module.exports = {
 	test,
 	create,
-	findOne
+	findById
 }
 

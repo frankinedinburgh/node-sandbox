@@ -31,7 +31,7 @@ router.get('/tickets/', (req, res) => {
 			res.json(error.message)
 		}
 	}).then(function(response) {
-        console.log(JSON.stringify(response.data, null, 4))
+			console.log(JSON.stringify(response.data, null, 4))
 		if(response.status !== 200) {
 			res.json(response.statusText)
 		}

@@ -1,19 +1,25 @@
 const dotenv = require('dotenv')
 dotenv.config({path: '.env'})
+const fs = require('fs')
+const path = require('path')
 const _ = require('lodash')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const express = require('express')
+const morgan = require('morgan')
 const mailer = require('express-mailer')
 const app = express()
 const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 
 app.set('view engine', 'pug');
+// create a write stream (in append mode)
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), {flags: 'a'})
+app.use(morgan('combined', {stream: accessLogStream}))
 app.use(bodyParser.json());// for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use((req, res, next) => {
     let now = new Date().toString()
-    console.log(now)
+    //console.log(now)
     next()
 })
 
@@ -98,27 +104,35 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /**
  * Index
  */
+
+// GET method route
 app.get('/', indexRoute)
 app.get('/strava/', stravaRoute)
 app.get('/tickets/', ticketsRoute)
-app.get('/email/', emailRoute)
 app.get('/training/', trainingRoute)
-app.get('/property/', propertyRoute)
+//app.get('/training/:id', function (req, res){
+//	res.send(req.params)
+//})
+
+//app.get('/tickets/', ticketsRoute)
+//app.get('/email/', emailRoute)
+//app.get('/training/', trainingRoute)
+//app.get('/property/', propertyRoute)
 
 
 
 
-const Training = require('./models/training.model')
-app.get('/testing/', function(req, res){
-	Training.find({}).exec(function (err, books){
-			if (err) {
-				res.send('error occured')
-			} else {
-				console.log(books);
-				res.json(books);
-			}
-		});
-})
+//const Training = require('./models/training.model')
+//app.get('/testing/', function(req, res){
+//	Training.find({}).exec(function (err, books){
+//			if (err) {
+//				res.send('error occured')
+//			} else {
+//				console.log(books);
+//				res.json(books);
+//			}
+//		});
+//})
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
