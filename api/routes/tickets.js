@@ -3,13 +3,10 @@ const router = express.Router();
 const axios = require('axios');
 const _ = require('lodash');
 
-
 let BACKLOG = encodeURIComponent('project="MENA"');
 const auth = Buffer.from(`${process.env.JIRA_USERNAME}:${process.env.JIRA_PASSWORD}`, 'utf8').toString('base64');
 
-
 router.get('/tickets/', (req, res) => {
-
 	res.set('Access-Control-Allow-Origin', '*')
 
 	const instance = axios({

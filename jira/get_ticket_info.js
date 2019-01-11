@@ -6,7 +6,7 @@ const request = require('request');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const getTicket = (num) => (
+exports.getTicket = (num) => (
 
 	new Promise((resolve, reject) => {
 
@@ -40,7 +40,7 @@ const getTicket = (num) => (
 )
 
 
-const getJiraTicketsByQuery = (query) => {
+exports.getJiraTicketsByQuery = (query) => {
 	return new Promise(function(resolve, reject){
 		request(`${process.env.JIRA_URL}/rest/api/2/search?jql=${query}`, {
 			json: true,
@@ -61,7 +61,7 @@ const getJiraTicketsByQuery = (query) => {
 };
 
 
-const postComment = (ticket, comment) => {
+exports.postComment = (ticket, comment) => {
 
 	const options = {
 		method: 'POST',
@@ -92,23 +92,6 @@ const postComment = (ticket, comment) => {
 		});
 	});
 };
-
-
-
-
-
-
-module.exports = {
-	getTicket,
-	getJiraTicketsByQuery,
-	postComment
-};
-
-
-
-
-
-
 
 //curl -D- -u fred:fred -X PUT --data {see below} -H "Content-Type: application/json" http://kelpie9:8081/rest/api/2/issue/QA-31
 

@@ -1,5 +1,5 @@
 const dotenv = require('dotenv')
-dotenv.config({path: '.env'})
+dotenv.config({path: '../.env'})
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
@@ -14,12 +14,13 @@ const port = process.env.PORT || 3000
 app.set('view engine', 'pug');
 // create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.log'), {flags: 'a'})
+
 app.use(morgan('combined', {stream: accessLogStream}))
 app.use(bodyParser.json());// for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use((req, res, next) => {
     let now = new Date().toString()
-    //console.log(now)
+    console.log(now)
     next()
 })
 
@@ -30,6 +31,8 @@ const emailRoute = require('./routes/email')
 const ticketsRoute = require('./routes/tickets')
 const trainingRoute = require('./routes/training')
 const propertyRoute = require('./routes/property')
+const jobsRoute = require('./routes/jobs')
+const fakerRoute = require('./routes/faker')
 
 
 /**
@@ -109,15 +112,16 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.get('/', indexRoute)
 app.get('/strava/', stravaRoute)
 app.get('/tickets/', ticketsRoute)
-app.get('/training/', trainingRoute)
-//app.get('/training/:id', function (req, res){
-//	res.send(req.params)
-//})
+// USE route module
+app.use('/training/', trainingRoute)
+app.use('/property/', propertyRoute)
+app.use('/jobs/', jobsRoute)
+app.use('/faker/', fakerRoute)
 
-//app.get('/tickets/', ticketsRoute)
-//app.get('/email/', emailRoute)
-//app.get('/training/', trainingRoute)
-//app.get('/property/', propertyRoute)
+//app.use('/tickets/', ticketsRoute)
+//app.use('/email/', emailRoute)
+//app.use('/training/', trainingRoute)
+//app.use('/property/', propertyRoute)
 
 
 

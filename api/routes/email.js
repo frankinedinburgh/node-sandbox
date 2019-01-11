@@ -2,7 +2,7 @@ const express = require('express')
 const _ = require('lodash')
 const router = express.Router()
 
-const { getJiraTicketsByQuery } = require('../jira/get_ticket_info');
+const { getJiraTicketsByQuery } = require('../../jira/get_ticket_info');
 
 
 /* GET home page. */

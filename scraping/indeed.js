@@ -1,6 +1,11 @@
 const _ = require('lodash');
 const fs = require('fs');
+const path = require('path');
 const puppeteer = require('puppeteer');
+
+if(!process.env.DIR) return console.log('define the DIR environment variable')
+const file = path.join(process.env.DIR, 'jobs.json')
+
 
 
 async function indeed() {
@@ -24,7 +29,7 @@ async function indeed() {
 				console.log(el.innerText)
 				console.log(title[index].innerText)
 				companies.push({
-					title: title[ index ].innerText, 
+					title: title[ index ].innerText,
 					company: el.innerText
 				});
 
@@ -34,7 +39,7 @@ async function indeed() {
 		});
 
 		console.log(_.uniq(results));
-		saveToFile(JSON.stringify(_.uniq(results), null, 4))
+		saveToFile(file, JSON.stringify(_.uniq(results), null, 4))
 	}
 	catch (error) {
 		console.log(error);
@@ -43,8 +48,8 @@ async function indeed() {
 	browser.close();
 }
 
-function saveToFile(data) {
-	fs.writeFile('./playground/jobs.json', data, function (err) {
+function saveToFile(file, data) {
+	fs.writeFile(file, data, function (err) {
 		if (err) throw err;
 		console.log('Saved file to ./playground/jobs.json!');
 	});
