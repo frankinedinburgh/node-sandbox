@@ -48,13 +48,34 @@ the jira directory contains snippets for calling the JIRA api
 
     <sup>It's a mix between mongodb and memcache</sup>
 - [10/01/2019 Debuging Express Routing issues](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes)
-- [Bad habits to avoid as a developer](https://www.youtube.com/watch?v=BQGxEn9oWxc)
+- [10/01/2019 Bad habits to avoid as a developer](https://www.youtube.com/watch?v=BQGxEn9oWxc)
+- [14/01/2019 Learning how to use Next.js ](https://nextjs.org/)
+- [14/01/2019 http://api.tvmaze.com/search ](http://api.tvmaze.com/search)
+
+
+- [14/01/2019 Styling Next JS components ](https://nextjs.org/learn/basics/styling-components/styles-and-nested-components)
     
-  
-  
-
-
 
 
  ### Routes to test
+ 
+ 
+ ### Things to study
+ 
+ - React
+ - Redux
+ - Redux-saga
+ - Next.js
+ - Material UI
+ - Storybook
+ - Cheerio
+ - Lodash
+ - Babel
+ - Webpack
+ - Eslint
+ - Ramda
+ - Node & Express
+ - RxJS
+ - mongoose
+ - graphql
  

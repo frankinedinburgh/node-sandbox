@@ -9,26 +9,11 @@ const Schema = mongoose.Schema;
 const Today = new Date().toLocaleDateString();
 
 const trainingSchema = new Schema({
-	date: {
-		type: Date,
-		default: Today
-	},
-	day: {
-		type: String,
-		default: 'Tuesday'
-	},
-	session: {
-		type: String,
-		default: 'Track'
-	},
-	details: {
-		type: String,
-		default: ''
-	},
-	notes: {
-		type: String,
-		default: ''
-	}
+	date: { type: Date, required: false, default: Today },
+	day: { type: String, required: false, default: 'Tuesday' },
+	session: { type: String, required: false, default: 'Track' },
+	details: { type: String, required: false, default: '' },
+	notes: { type: String, required: false, default: '' }
 });
 
 

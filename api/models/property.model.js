@@ -7,11 +7,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const housesSchema = new Schema({
-	address: { type: String },
-	link: { type: String },
-	desc: { type: String },
-	price: { type: String },
-	viewings: { type: String }
+	address: { type: String, required: true },
+	link: { type: String, required: false },
+	desc: { type: String, required: false },
+	price: { type: String, required: false },
+	viewings: { type: String, required: false }
 });
 
 module.exports = mongoose.model('House', housesSchema, 'Property');

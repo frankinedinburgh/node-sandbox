@@ -7,16 +7,8 @@ exports.test = function (req, res) {
 	});
 };
 
-exports.findById = function(req, res) {
-	Training.findById(req.params.id, 'session details').exec(function (err, session){
-		if (err) return res.send('error occured');
-		console.log('Sucessfully requested one item');
-		//res.send('Sucessfully requested one item');
-		res.json(session);
-	});
-};
-
 exports.create = function(req, res, next) {
+	console.log(req.body)
 	let session = new Training({
 			date: req.body.date,
 			day: req.body.day,
@@ -31,6 +23,14 @@ exports.create = function(req, res, next) {
 	})
 };
 
+exports.findById = function (req, res, next){
+	Training.findById(req.params.id).exec(function (err, session){
+		if (err) return res.send('error occured');
+		console.log('Sucessfully requested one item');
+		//res.send('Sucessfully requested one item');
+		res.json(session);
+	});
+};
 
 exports.createMany = function (req, res, next){
 	let session = new Training({

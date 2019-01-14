@@ -9,7 +9,7 @@ const morgan = require('morgan')
 const mailer = require('express-mailer')
 const app = express()
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3333
 
 app.set('view engine', 'pug');
 // create a write stream (in append mode)
@@ -18,6 +18,11 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs/access.l
 app.use(morgan('combined', {stream: accessLogStream}))
 app.use(bodyParser.json());// for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+})
 app.use((req, res, next) => {
     let now = new Date().toString()
     console.log(now)
