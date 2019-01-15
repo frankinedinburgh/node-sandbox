@@ -1,0 +1,11 @@
+{
+  "name": "react-sandbox",
+  "version": 1,
+  "routes": [
+    {
+      "src": "/pages",
+      "dest": "/index.js",
+      "status": 200
+    }
+  ]
+}

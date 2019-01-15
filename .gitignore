@@ -1,11 +1,30 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 .idea
 .env
 sandbox/*
 playground
-node_modules
 faker.txt
 jira_*
 images
 modules/emails.js
 config
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+/.next
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 

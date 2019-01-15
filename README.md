@@ -54,6 +54,7 @@ the jira directory contains snippets for calling the JIRA api
 
 
 - [14/01/2019 Styling Next JS components ](https://nextjs.org/learn/basics/styling-components/styles-and-nested-components)
+- [15/01/2019 Next JS with Redux ](https://github.com/zeit/next.js/tree/master/examples/with-redux)
     
 
 
@@ -79,3 +80,8 @@ the jira directory contains snippets for calling the JIRA api
  - mongoose
  - graphql
  
+ 
+ 
+ ## Online Courses
+ 
+ Registered for [M220JS: MongoDB for Javascript Developers](https://university.mongodb.com/courses/M220JS/about) 
