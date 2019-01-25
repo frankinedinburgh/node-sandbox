@@ -5,26 +5,19 @@
  */
 
 console.log(
-	isUnique('abcdefA'),
-	isUnique('56478956hjhdsafh'),
-	isUnique('£@£$£$£%£^DSgfsdgsfdgdfs'),
-	isUnique('7890@£$bnmfgER'),
+	isUnique('abcdefg')
 ); // true false false true
 
 function isUnique(str) {
-	const chars = new Set();
-	for(let i = 0; i < str.length; i++) { // O(n)
-		const thisChar = str[i]
-
-		if(chars.has(thisChar) === true) {
-			return false
+	for(let i=0; i<str.length; i++) {
+		if(str.lastIndexOf(str[i]) !== i) {
+			return false;
 		}
-
-		chars.add(thisChar)
 	}
-
-	return false
+	return true;
 }
+
+
 
 
 
