@@ -1,3 +1,4 @@
+
 console.time("isUnique version 1");
 function isUnique(str) { // 0(n)
 	for(let i=0; i<str.length; i++) { // 0(n)
@@ -63,5 +64,6 @@ function isUnique4(str){ // 0(n)
 console.timeEnd("isUnique version 4");
 console.log(
 	isUnique4('abcdefg'),
-	isUnique4('JanFebMArchAprilMay')
+	isUnique4('JanFebMArchAprilMay'),
+	isUnique4([5,7,8,'f','f','g','this isafhjds'])
 );
